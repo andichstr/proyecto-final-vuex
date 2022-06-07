@@ -1,29 +1,56 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/",
+    name: "Login",
+    component: () => import("../views/Login.vue"),
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: "/index",
+    name: "Usuario",
+    component: () => import("../views/usuarios/client/Usuario.vue"),
+  },
+  {
+    path: "/productos/:id",
+    name: "Producto",
+    component: () => import("../views/usuarios/client/producto/Producto.vue"),
+  },
+  {
+    path: "/register",
+    name: "NuevoUsuario",
+    component: () => import("../views/NuevoUsuario.vue"),
+  },
+  {
+    path: "/admin",
+    name: "Admin",
+    component: () => import("../views/usuarios/admin/Admin.vue"),
+  },
+  {
+      path: "/nuevoProducto",
+      name: "NuevoProducto",
+      component: () => import("../views/usuarios/admin/AgregarProducto.vue")
+  },
+  {
+      path: "/editarProducto/:id",
+      name: "EditarProducto",
+      component: () => import("../views/usuarios/admin/EditarProducto.vue")
+  },
+  {
+      path: "/misOrdenes/:id",
+      name: "MisOrdenes",
+      component: () => import("../views/usuarios/client/MisOrdenes.vue")
   }
-]
+];
+
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
