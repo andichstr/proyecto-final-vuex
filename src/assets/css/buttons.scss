@@ -1,0 +1,298 @@
+/* Boton Login y Aceptar */
+.divLogin {
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+    vertical-align: center;
+}
+
+.btn-login {
+    border: none;
+    color: #fff;
+    background: rgb(20, 20, 20);
+    transition: .3s ease-in-out all;
+    height: 50px;
+    width: 60%;
+}
+
+.btn-login::after {
+    content: "";
+    width: 1px;
+    height: 1px;
+    background: none;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transition: .3s ease-in-out all;
+    border-radius: 4000px;
+    transform-origin: center;
+}
+
+.btn-login:hover::after {
+    transform: scale(200);
+    background: #01d9ff70;
+}
+
+.btn-login:hover {
+    background-color: #00a9c7d7;
+    color: #000;
+}
+
+.btn-login span{
+    font-weight: bold;
+    z-index: 2;
+}
+/* Boton volver */
+
+.divVolver {
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+    vertical-align: center;
+}
+
+.btn-volver {
+    height: 40px;
+    width: 50%;
+    border: none;
+    color: #fff;
+    background: rgb(20, 20, 20);
+    transition: .3s ease-in-out all;
+}
+.btn-volver::after {
+    content: "";
+    width: 1px;
+    height: 1px;
+    background: none;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transition: .3s ease-in-out all;
+    border-radius: 4000px;
+    transform-origin: center;
+}
+
+.btn-volver:hover::after {
+    transform: scale(100);
+    background: #ff010154;
+}
+
+.btn-volver:hover {
+    background-color: #b80303;
+    color: #000;
+}
+
+.btn-volver span{
+    font-weight: bold;
+    z-index: 2;
+}
+
+/* Boton Editar y Borrar */
+
+.divAdmin {
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+    vertical-align: center;
+}
+
+.btn-admin {
+    border: none;
+    color: #fff;
+    background: rgb(20, 20, 20);
+    transition: .3s ease-in-out all;
+    height: 40px;
+    width: 80%;
+}
+.btn-admin span{
+    font-weight: bold;
+    z-index: 2;
+}
+
+.editar::after {
+    content: "";
+    width: 1px;
+    height: 1px;
+    background: none;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transition: .3s ease-in-out all;
+    border-radius: 4000px;
+    transform-origin: center;
+}
+
+.editar:hover::after {
+    transform: scale(60);
+    background: #ff73013a;
+}
+
+.editar:hover {
+    background-color: #ff7301;
+    color: #000;
+}
+
+.borrar::after {
+    content: "";
+    width: 1px;
+    height: 1px;
+    background: none;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transition: .3s ease-in-out all;
+    border-radius: 4000px;
+    transform-origin: center;
+}
+
+.borrar:hover::after {
+    transform: scale(60);
+    background: #ff010154;
+}
+
+.borrar:hover {
+    background-color: #b80303;
+    color: #000;
+}
+
+/* Botones editar producto */
+
+.divEditar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    overflow: hidden;
+    justify-content: center;
+    vertical-align: center;
+    text-align: center;
+}
+
+button.btn-editar {
+    display: inline-flex;
+    width: 40%;
+    height: 40px;
+    justify-content: center;
+    vertical-align: center;
+    text-align: center;
+    border: none;
+    background: rgb(20, 20, 20);
+    color: #fff;
+    transition: .3s ease-in-out all;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.btn-editar span{
+    font-weight: bold;
+    z-index: 2;
+}
+
+.volver::after {
+    content: "";
+    width: 1px;
+    height: 1px;
+    background: none;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transition: .3s ease-in-out all;
+    border-radius: 4000px;
+    transform-origin: center;
+}
+
+.volver:hover {
+    background-color: #b80303;
+    color: #000;
+}
+
+.edit::after {
+    content: "";
+    width: 1px;
+    height: 1px;
+    background: none;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transition: .3s ease-in-out all;
+    border-radius: 4000px;
+    transform-origin: center;
+}
+
+.edit:hover {
+    background-color: #ff7301;
+    color: #000;
+}
+
+.save::after {
+    content: "";
+    width: 1px;
+    height: 1px;
+    background: none;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transition: .3s ease-in-out all;
+    border-radius: 4000px;
+    transform-origin: center;
+}
+
+.save:hover {
+    background-color: #00a9c7d7;
+    color: #000;
+    cursor: pointer;
+}
+
+.btn-ordenes {
+    border: none;
+    color: rgb(0, 0, 0);
+    background: rgb(255, 179, 93);
+    transition: .3s ease-in-out all;
+    top: 0;
+    left: 50%;
+    height: 40px;
+    width: 150px;
+}
+.btn-ordenes span{
+    font-weight: bold;
+    z-index: 2;
+}
+
+.ordenes::after {
+    content: "";
+    width: 1px;
+    height: 1px;
+    background: none;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 50%;
+    transition: .3s ease-in-out all;
+    border-radius: 4000px;
+    transform-origin: center;
+}
+
+.ordenes:hover {
+    background-color: #ff7301;
+    color: #000;
+}
+
+.btn-producto {
+    border: none;
+    color: rgb(255, 255, 255);
+    background: rgb(24, 23, 23);
+    transition: .3s ease-in-out all;
+    top: 0;
+    left: 50%;
+    height: 35px;
+    width: 120px;
+}
+.btn-producto span{
+    font-weight: bold;
+    z-index: 2;
+}

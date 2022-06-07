@@ -26,10 +26,13 @@ export default {
             state.products[data.i] = data.product;
         },
         deleteProduct(state, i){
-            state.products.splice(i,1)
+            state.products.splice(i,1);
         },
         addProduct(state, data) {
             state.products.push(data);
+        },
+        addStockProduct(state, data){
+            state.products[data.i].stock += data.stock;
         }
     },
     actions: {
@@ -51,7 +54,7 @@ export default {
             let result = null;
             result = await axios.post(`${apiURL}/products`, data)
             .then(response => {
-                let result = response.data;
+                let result = response.dza;
                 return result;
             })
             .catch(error => {
@@ -76,7 +79,7 @@ export default {
                     if (state.products[i].id == product.id) {
                         const data = {
                             'i': i,
-                            'product': product 
+                            'product': product
                         };
                         commit('setProduct', data);
                     }
@@ -84,7 +87,7 @@ export default {
             }
             
         },
-        async deleteProduct({ commit }, id) {
+        async deleteProduct({ commit, state }, id) {
             let result = null;
             result = await axios.delete(process.env.VUE_APP_API_URL + '/products/' + id)
             .then(response => {
@@ -95,11 +98,33 @@ export default {
                 console.error(error);
             });
             if (result != null) {
-                commit('deleteProduct', id);
+                for(let i = 0; i < state.products.length; i++) {
+                    if (state.products[i].id == id){
+                        commit('deleteProduct', i);
+                    }
+                }
             }
         },
-        setActualProduct({ commit }, data) {
-            commit('setActualProduct', data);
+        setActualProduct({ commit, state }, id) {
+            for (const element of state.products){
+                if (element.id == id){
+                    commit('setActualProduct', element);
+                }
+            }
+        },
+        updateStockProduct({ commit, state }, data) {
+            let payload = null;
+            for (let i = 0; i < state.products.length; i++) {
+                if (state.products[i].id == data.id) {
+                    payload = {
+                        'i': i,
+                        'stock': data.stock
+                    }
+                }
+            }
+            if (payload != null){
+                commit('addStockProduct', payload);
+            }
         }
     }
 }

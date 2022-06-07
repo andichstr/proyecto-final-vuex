@@ -6,7 +6,7 @@
         <div class="carritoDesplegado" v-else>
             <img src="https://i.imgur.com/JyKCGKd.png" alt="Cerrar" class="cerrar" @click="desplegarCarrito()">
             <h2>Tu carrito</h2>
-            <div v-if="cart.carrito.length != 0">
+            <div v-if="carrito.length != 0">
                 <table class="table">
                     <thead>
                         <tr>
@@ -17,11 +17,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item) in cart.carrito" :key="item.id">
+                        <tr v-for="(item) in carrito" :key="item.id">
                             <td class="col-2">{{ item.stock }}</td>
                             <td class="col-4">{{ item.name }}</td>
                             <td class="col-4">$ {{ item.price * item.stock }}</td>
-                            <td class="col-2"><input type="button" class="btn btn-danger" value="Eliminar" @click="eliminarProductoCarrito(item.id)"></td>
+                            <td class="col-2"><input type="button" class="btn btn-danger" value="Eliminar" @click="eliminarProductoCarrito(item)"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -46,46 +46,62 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['products', ['getProductsFromAPI']]),
-        ...mapActions(['cart', ['deleteCartProduct', 'createOrderToAPI', 'updateStockAPI', 'restartCart', 'setACart']]),
+        ...mapActions('products', ['getProductsFromAPI', 'updateStockProduct']),
+        ...mapActions('cart', ['deleteCartProduct', 'createOrderToAPI', 'updateStockAPI', 'restartCart', 'setACart']),
         desplegarCarrito() {
             this.desplegado = !this.desplegado;
         },
-        eliminarProductoCarrito(id) {
-            this.cart.deleteCartProduct(id);
+        eliminarProductoCarrito(prod) {
+            this.updateStockProduct(prod);
+            this.deleteCartProduct(prod.id);
         },
         createOrder(precioTotal){
+            let miCarrito = JSON.parse(JSON.stringify(this.carrito));
+            console.log(miCarrito);
             this.createOrderToAPI(precioTotal);
-            this.cart.carrito.forEach(element => {
+            miCarrito.forEach(element => {
                 this.updateStockAPI(element);
             });
             this.restartCart();
         }
     },
     computed: {
-        ...mapState(['carrito']),
-        ...mapGetters(['getCarrito']),
+        ...mapState('cart', ['carrito']),
+        ...mapState('products', ['products']),
+        ...mapGetters('cart', ['getCarrito']),
+        ...mapGetters('products', ['getProducts']),
         cantidadTotal() {
             let total = 0;
-            this.cart.carrito.forEach(element => {
-                total += (element.stock);
+            this.carrito.forEach(element => {
+                total += (parseInt(element.stock));
             });
             return total;
         },
         precioTotal() {
             let precioTotal = 0;
-            this.cart.carrito.forEach(element => {
+            this.carrito.forEach(element => {
                 precioTotal = precioTotal + (element.price * element.stock);
             });
             return precioTotal;
         },
     },
-/*     mounted() {
+    mounted() {
         let carro = JSON.parse(localStorage.getItem('cart'));
         if (carro != undefined) {
-            this.setACart(carro);
+            this.setACart(carro)
+            .then(() => {
+                carro.forEach(element => {
+                    console.log(element);
+                    this.products.forEach(prod => {
+                        console.log(prod);
+                        if (element.id == prod.id) {
+                            prod.stock -= element.stock;
+                        }
+                    })
+                })
+            })
         }
-    } */
+    }
 }
 </script>
 

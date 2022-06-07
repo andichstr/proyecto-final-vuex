@@ -27,31 +27,37 @@ export default {
         addAmmount(state, data) {
             state.carrito[data.i].stock += data.ammount;
             localStorage.setItem('cart', JSON.stringify(state.carrito));
-        }
+        },
     },
     actions: {
         setACart( { commit }, cart ) {
             commit('setCart', cart);
         },
-        addProductToCart({ commit }, product) {
+        addProductToCart({ commit, state }, product) {
+            for (let i = 0; i < state.carrito.length; i++) {
+                console.log(state.carrito[i]);
+                if (state.carrito[i].id == product.id) {
+                    commit('addAmmount', { 'i': i, 'ammount': product.stock });
+                    return
+                }
+            }
             commit('addProductToCart', product);
         },
         deleteCartProduct( { commit, state }, id ) {
-            for (i = 0; i > state.carrito.length; i++) {
+            for (let i = 0; i < state.carrito.length; i++) {
                 if (state.carrito[i].id == id) {
                     commit('deleteCartProduct', i);
-                };
-            };
+                }
+            }
         },
-        addAmmount( { commit, state }, data ) {
-            for (i = 0; i > state.carrito.length; i++) {
-                if (state.carrito[i].id == data.id) {
-                    commit('addAmmount', { 'i': i, 'ammount': data.ammount });
-                };
+        async createOrderToAPI({ state }, data) {
+            let user = JSON.parse(localStorage.getItem('user'));
+            let order = {
+                'products': state.carrito,
+                'datetime': Date('dd/mm/yyyy'),
+                'total': data
             };
-        },
-        async createOrderToAPI(data) {
-            await axios.push(`${apiURL}/orders`, data)
+            await axios.post(`${apiURL}/users/${user.id}/orders`, order)
             .then(response => {
                 return response;
             })

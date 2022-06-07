@@ -10,10 +10,16 @@
             <div>Disponibles: {{ producto.stock }}</div>
             <div>$ {{ producto.price }}</div>
             <input type="number" v-model="contador" @keyup="checkContador()"/>
-            <input type="button" :disabled="!botonProductoHabilitado" class="botonAgregarCarrito" @click="agregarProductoCarrito()" :value="valorBotonProducto"/>
-            <router-link :to="{ name: 'Producto', params: { id: producto.id }}">
-            <input type="button" class="botonVerDetalle" value="Ver detalle"/>
-            </router-link>
+            <div class="divEditar">
+                <button :disabled="!botonProductoHabilitado" class="btn-editar save" @click="agregarProductoCarrito()">
+                    <span>{{ valorBotonProducto }}</span>
+                </button>
+                <router-link :to="{ name: 'Producto', params: { id: producto.id }}">
+                    <button type="button" class="btn-editar edit">
+                        <span>Ver Detalle</span>
+                    </button>
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -46,18 +52,20 @@ export default {
         ...mapActions('products', ['getProductsFromAPI', 'setActualProduct']),
         ...mapActions('cart', ['addProductToCart']),
         checkContador() {
-            if (this.contador > this.producto.stock){
+            let miCont = parseInt(this.contador);
+            if (miCont > this.producto.stock){
                 this.contador = this.producto.stock;
-            } else if (this.contador < 0) {
+            } else if (miCont < 0) {
                 this.contador = 0;
             }
             this.checkStock();
         },
         checkStock() {
+            let miCont = parseInt(this.contador);
             if (this.producto.stock == 0){
                 this.botonProductoHabilitado = false;
                 this.valorBotonProducto = "Sin stock";
-            } else if (this.producto.stock != 0 && this.contador == 0) {
+            } else if (this.producto.stock != 0 && miCont == 0) {
                 this.botonProductoHabilitado = false;
                 this.valorBotonProducto = "Agregar";
             } else {
@@ -67,20 +75,20 @@ export default {
         },
         agregarProductoCarrito(){
             let miProducto = {...this.producto};
-            miProducto.stock = this.contador;
+            miProducto.stock = parseInt(this.contador);
             this.addProductToCart(miProducto);
+            this.producto.stock -= parseInt(this.contador);
+            this.contador = 0;
+            this.checkStock();
         }
-    },
-    mounted() {
-        this.setActualProduct(this.producto);
     },
 }
 </script>
 
 <style scoped>
 
+@import '../assets/css/buttons.scss';
 .grillaProducto{
-    position: relative;
     width: 300px;
     max-height: 380px;
     box-shadow: 0 0 10px rgba(45, 75, 100, 0.7);
@@ -94,13 +102,6 @@ export default {
     z-index: 1;
 }
 
-.favorito {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 40px;
-}
-
 .imgGrilla {
     max-width: 100%;
     height: 150px;
@@ -110,33 +111,12 @@ export default {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.7);
 }
 
-.botonAgregarCarrito {
-    background-color: #01d9ffd7;
-    width: 130px;
+button {
     border-radius: 10px;
+    max-width: 100px;
+}
+
+.divEditar {
     margin-top: 10px;
-    font-size: 1.1em;
-    padding: 5px 0;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    cursor: pointer;
 }
-
-.botonAgregarCarrito:hover {
-    background-color: #0aa19ad0;
-}
-.botonVerDetalle {
-    background-color: burlywood;
-    width: 130px;
-    border-radius: 10px;
-    margin-top: 10px;
-    font-size: 1.1em;
-    padding: 5px 0;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-}
-
-.botonVerDetalle:hover {
-    background-color: rgb(109, 88, 61);
-}
-
 </style>

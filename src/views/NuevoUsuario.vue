@@ -1,75 +1,61 @@
 <template>
     <div class="container">
-        <h1>Nuevo Usuario</h1>
+        <h2>Nuevo Usuario</h2>
         <form class="form" action="">
-            <div class="row">
-                <div class="col-3">
-                    <label for="username">Usuario: </label>
-                </div>
-                <div class="col-9">
-                    <input type="text" id="username" placeholder="Tu Usuario" class="form-control" @keyup="validateUsername()" v-model="user.username"/>
-                </div>
+            <div class="floating-content">
+                <input type="text" id="username" placeholder=" " class="floating-input" @keyup="validateUsername()" v-model="user.username"/>
+                <label for="username" class="floating-label">Usuario: </label>
             </div>
             <div class="row" v-if='validUsername != ""'>
                 <p class="errorForm">{{ validUsername }}</p>
             </div>
-            <div class="row">
-                <div class="col-3">
-                    <label for="nombre">Nombre y Apellido: </label>
-                </div>
-                <div class="col-9">
-                    <input type="text" id="nombre" placeholder="Tu nombre y apellido" class="form-control" @keyup="validateNombre($event)" v-model="user.name"/>
-                </div>
+            <div class="floating-content">
+                <input type="text" id="nombre" placeholder=" " class="floating-input" @keyup="validateNombre($event)" v-model="user.name"/>
+                <label for="nombre" class="floating-label">Nombre y Apellido: </label>
             </div>
             <div class="row" v-if='validNombre != ""'>
                 <p class="errorForm">{{ validNombre }}</p>
             </div>
-            <div class="row">
-                <div class="col-3">
-                    <label for="email">Mail: </label>
-                </div>
-                <div class="col-9">
-                    <input type="text" id="email" placeholder="Tu email" class="form-control" @keyup="validateEmail()" v-model="user.email"/>
-                </div>
+            <div class="floating-content">
+                <input type="text" id="email" placeholder=" " class="floating-input" @keyup="validateEmail()" v-model="user.email"/>
+                <label for="email" class="floating-label">Mail: </label>
             </div>
             <div class="row" v-if='validMail != ""'>
                 <p class="errorForm">{{ validMail }}</p>
             </div>
-            <div class="row">
-                <div class="col-3">
-                    <label for="edad">Edad: </label>
-                </div>
-                <div class="col-9">
-                    <input type="number" id="edad" placeholder="Tu edad" class="form-control" @keyup="validateEdad()" @change="validateEdad()" v-model="user.edad"/>
-                </div>
+            <div class="floating-content">
+                <input type="number" id="edad" class="floating-input" @keyup="validateEdad()" @change="validateEdad()" v-model="user.edad"/>
+                <label for="edad" class="floating-label">Edad: </label>
             </div>
             <div class="row" v-if='validEdad != ""'>
                 <p class="errorForm">{{ validEdad }}</p>
             </div>
-            <div class="row">
-                <div class="col-3">
-                    <label for="password">Contraseña: </label>
-                </div>
-                <div class="col-9">
-                    <input type="password" id="password" placeholder="Tu contraseña" class="form-control" @keyup="validatePassword()" v-model="user.password"/>
-                </div>
+            <div class="floating-content">
+                <input type="password" id="password" placeholder=" " class="floating-input" @keyup="validatePassword()" v-model="user.password"/>
+                <label for="password" class="floating-label">Contraseña: </label>
             </div>
             <div class="row" v-if='validPassword != ""'>
                 <p class="errorForm">{{ validPassword }}</p>
             </div>
-            <div class="row">
-                <input type="button" class="btn btn-agregar" value="Agregar" @click="agregarUsuario"/>
+            <div class="row divLogin">
+                <button class="btn-login" @click="agregarUsuario">
+                <span>Agregar</span>
+                </button>
             </div>
         </form>
-        <div class="btnVolverDiv">
-            <router-link to="/"><button class="btn btn-danger">Volver</button></router-link>
+        <div class="row divVolver">
+            <router-link to="/">
+                <button class="btn-volver">
+                    <span>Volver</span>
+                </button>
+            </router-link>
         </div>
     </div>
 </template>
 
 <script>
 import store from '@/store';
-import { mapState, mapGetters, mapActions } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import validations from '../mixins/validationsMixin';
 
 export default {
@@ -93,15 +79,11 @@ export default {
 
 <style scoped>
 
+    @import '../assets/css/forms.scss';
+    @import '../assets/css/buttons.scss';
     .container {
         text-align: center;
-    }
-    input {
-        width: 100%;
-    }
-
-    .col-3 {
-        text-align: right;
+        width: 80%;
     }
 
     .form {
@@ -117,15 +99,4 @@ export default {
         text-align: center;
     }
 
-    .btn-agregar {
-        background-color: #0d6efd;
-        border-color: #0d6efd;
-        color: white;
-        margin-top: 5px;
-    }
-
-    .btnVolverDiv {
-        text-align: center;
-        margin-top: 5px;
-    }
 </style>

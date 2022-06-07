@@ -17,12 +17,26 @@
                     <td>{{ product.name }}</td>
                     <td>{{ product.price }}</td>
                     <td>{{ product.stock }}</td>
-                    <td><input type="button" class="btn btn-warning" @click="editarProducto(product.id)" value="Editar"/></td>
-                    <td><input type="button" class="btn btn-danger" @click="borrarProducto(product.id)" value="Borrar"/></td>
+                    <td>
+                        <div class="divAdmin">
+                            <button class="btn-admin editar" @click="editarProducto(product.id)"><span>Editar</span></button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="divAdmin">
+                            <button class="btn-admin borrar" @click="deleteProduct(product.id)"><span>Borrar</span></button>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
-        <router-link to="/nuevoProducto" class="btn btn-primary">Agregar nuevo producto</router-link>
+        <div class="divLogin">
+            <router-link to="/nuevoProducto">
+                <button class="btn-login">
+                    <span>Agregar nuevo producto</span>
+                </button>
+            </router-link>
+        </div>
     </div>
 </template>
 
@@ -47,6 +61,8 @@ export default {
 </script>
 
 <style scoped>
+
+    @import '../assets/css/buttons.scss';
     .container{
         padding-top: 80px;
     }

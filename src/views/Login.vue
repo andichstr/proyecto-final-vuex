@@ -1,24 +1,19 @@
 <template>
   <div class="container">
+      <h2>Inicio de Sesión</h2>
         <form class="form" action="">
-            <div class="row">
-                <div class="col-3">
-                    <label for="username">Usuario: </label>
-                </div>
-                <div class="col-9">
-                    <input type="text" id="username" placeholder="Tu usuario" class="form-control" v-model="userForm.username"/>
-                </div>
+            <div class="floating-content">
+                <input type="text" id="username" placeholder=" " class="floating-input" v-model="userForm.username"/>
+                <label class="floating-label" for="username">Usuario: </label>
             </div>
-            <div class="row">
-                <div class="col-3">
-                    <label for="password">Contraseña: </label>
-                </div>
-                <div class="col-9">
-                    <input type="password" id="password" placeholder="Tu contraseña" class="form-control" v-model="userForm.password"/>
-                </div>
+            <div class="floating-content">
+                <input type="password" id="password" placeholder=" " class="floating-input" v-model="userForm.password"/>
+                <label class="floating-label" for="password">Contraseña: </label>
             </div>
-            <div class="row">
-                <input type="button" class="btn btn-primary" value="Login" @click="Login"/>
+            <div class="row divLogin">
+                <button type="button" class="btn-login" @click="Login">
+                    <span>Login</span>
+                </button>
             </div>
             <div class="row centrado">
                 <router-link to="/register">¿No estas registrado? ¡Registrate haciendo click aquí!</router-link>
@@ -68,7 +63,6 @@ export default {
         Login(){
             let result = this.tryToLog(this.users.users);
             if (result.isValid){
-                console.log(result.user);
                 this.setUserLogged(result.user);
                 delete result.user.password;
                 localStorage.setItem('user', JSON.stringify(result.user));
@@ -95,10 +89,12 @@ export default {
 </script>
 
 <style scoped>
-
+    @import '../assets/css/forms.scss';
+    @import '../assets/css/buttons.scss';
     .container{
         width: 50%;
         padding-top: 200px;
+        text-align: center;
     }
     .centrado {
         text-align: center;

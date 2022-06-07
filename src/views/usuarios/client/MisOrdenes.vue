@@ -9,7 +9,7 @@
                 <th>Total</th>
             </thead>
             <tbody>
-                <tr v-for="item in ordenes" :key="item.id">
+                <tr v-for="item in orders" :key="item.id">
                     <td>{{ item.id }}</td>
                     <td>
                         <p v-for="prod in item.products" :key="prod.id"><img :src="prod.img" :alt="prod.name" class="imgProd"/> {{ prod.stock }} {{ prod.name }}</p>
@@ -19,18 +19,34 @@
                 </tr>
             </tbody>
         </table>
-        <router-link to="/index" class="btn btn-danger">Volver</router-link>
+        <router-link to="/index">
+            <button class="btn-editar volver">
+                <span>Volver</span>
+            </button>
+        </router-link>
     </div>
 </template>
 
 <script>
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
     name: 'MisOrdenes',
+    computed: {
+        ...mapState("users", ["userLogged", "orders"]),
+        ...mapGetters("users", ["getUserLogged", "getOrders"]),
+    },
+    methods: {
+        ...mapActions("users", ["getOrdersFromAPI"]),
+    },
+    mounted() {
+        this.getOrdersFromAPI();
+    }
 }
 </script>
 
 <style scoped>
+    @import '../../../assets/css/buttons.scss';
     .container {
         margin-top: 50px;
         text-align: center;

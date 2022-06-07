@@ -1,49 +1,35 @@
 <template>
     <div class="container">
         <form action="">
-            <div class="row">
-                <div class="col-3">
-                    <label for="nombre">Nombre:</label>
-                </div>
-                <div class="col-9">
-                    <input type="text" id="nombre" class="form-control" placeholder="Nombre del producto" v-model="producto.name"/>
-                </div>
+            <div class="floating-content">
+                <input type="text" id="nombre" class="floating-input" placeholder=" " v-model="producto.name"/>
+                <label class="floating-label" for="nombre">Nombre:</label>
             </div>
-            <div class="row">
-                <div class="col-3">
-                    <label for="imagen">Imagen:</label>
-                </div>
-                <div class="col-9">
-                    <input type="text" id="imagen" class="form-control" placeholder="Url de la imagen" v-model="producto.img"/>
-                </div>
+            <div class="floating-content">
+                <input type="text" id="imagen" class="floating-input" placeholder=" " v-model="producto.img"/>
+                <label class="floating-label" for="imagen">Imagen:</label>
             </div>
-            <div class="row">
-                <div class="col-3">
-                    <label for="desc">Descripción:</label>
-                </div>
-                <div class="col-9">
-                    <textarea id="desc" class="form-control" placeholder="Descripción del producto" v-model="producto.desc"></textarea>
-                </div>
+            <div class="floating-content">
+                <textarea id="desc" class="floating-input" placeholder=" " v-model="producto.desc"></textarea>
+                <label class="floating-label" for="desc">Descripción:</label>
             </div>
-            <div class="row">
-                <div class="col-3">
-                    <label for="precio">Precio:</label>
-                </div>
-                <div class="col-9">
-                    <input type="number" class="form-control" id="precio" v-model="producto.price"/>
-                </div>
+            <div class="floating-content">
+                <input type="number" class="floating-input" id="precio" v-model="producto.price"/>
+                <label class="floating-label" for="precio">Precio:</label>
             </div>
-            <div class="row">
-                <div class="col-3">
-                    <label for="stock">Stock:</label>
-                </div>
-                <div class="col-9">
-                    <input type="number" class="form-control" id="stock" v-model="producto.stock"/>
-                </div>
+            <div class="floating-content">
+                <input type="number" class="floating-input" id="stock" v-model="producto.stock"/>
+                <label class="floating-label" for="stock">Stock:</label>
             </div>
-            <div class="divBotones">
-                <input type="button" class="btn btn-primary btnGuardar" @click="guardarProducto()" value="Guardar producto">
-                <router-link to="/admin" class="btn btn-warning btnVolver">Volver</router-link>
+            <div class="divEditar">
+                <button class="btn-editar save" @click="guardarProducto()">
+                    <span>Guardar Producto</span>
+                </button>
+                <router-link to="/admin">
+                    <button class="btn-editar volver">
+                        <span>Volver</span>
+                    </button>
+                </router-link>
             </div>
         </form>
     </div>
@@ -90,33 +76,7 @@ export default {
 </script>
 
 <style scoped>
-    input {
-        width: 70%;
-    }
-    textarea {
-        width: 70%;
-    }
-    .btnGuardar {
-        width: 50%;
-    }
-    .btnVolver {
-        width: 20%;
-        margin-left: 15px;
-    }
-    .container {
-        margin-top: 45px;
-    }
-    .divBotones {
-        text-align: center;
-        margin-top: 10px;
-    }
-    .col-3 {
-        text-align: right;
-    }
-    .col-9 {
-        text-align: left;
-    }
-    div {
-        margin-top: 1px;
-    }
+
+    @import '../../../assets/css/forms.scss';
+    @import '../../../assets/css/buttons.scss';
 </style>
