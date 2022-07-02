@@ -55,7 +55,7 @@ export default {
         editarProducto() {
             const result = this.editProductToAPI(this.producto);
             if (result) {
-                console.log("Producto editado exitosamente");
+                alert(`El producto ${this.producto.name} fue editado exitosamente`);
                 this.$router.push('/admin');
             }
         },
@@ -87,5 +87,8 @@ export default {
     textarea {
         height: 50px;
         padding-top: 10px;
+    }
+    a {
+        text-decoration: none;
     }
 </style>

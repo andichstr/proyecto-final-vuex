@@ -1,11 +1,7 @@
 <template>
     <div id="app">
-        <div class="divLogOff">
-            <router-link to="/" @click="logOff()" v-if="this.$route.path != '/' && this.$route.path != '/register'">
-            <button class="logOff">
-                <span>Log Off</span>
-            </button>
-            </router-link>
+        <div id="navbar" v-if="this.$route.path != '/' && this.$route.path != '/register'">
+            <Navbar/>
         </div>
         <router-view/>
     </div>
@@ -13,8 +9,11 @@
 
 <script>
 
+    import Navbar from './components/Navbar.vue';
+
     export default {
         name: "App",
+        components: { Navbar }
     }
     
 </script>

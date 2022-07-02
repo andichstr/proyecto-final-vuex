@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <form action="">
+        <form class="formProducto">
             <div class="floating-content">
                 <input type="text" id="nombre" class="floating-input" placeholder=" " v-model="producto.name"/>
                 <label class="floating-label" for="nombre">Nombre:</label>
@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
 
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
     data() {
@@ -54,11 +54,18 @@ export default {
     methods: {
         ...mapActions('products', ['getProductsFromAPI', 'editProduct', 'deleteProduct', 'addProductToAPI']),
         guardarProducto() {
-            const result = this.addProductToAPI(this.producto);
-            if (result) {
-                console.log("Producto agregado exitosamente");
-                this.clearForm();
+            if (this.checkForm()) {
+                const result = this.addProductToAPI(this.producto);
+                if (result) {
+                    alert(`El producto ${this.producto.name} fue agregado exitosamente`);
+                    this.clearForm();
+                }
+            } else {
+                alert("Todos los campos son obligatorios");
             }
+        },
+        checkForm() {
+            return this.producto.name != "" && this.producto.img != "" && this.producto.desc != "";
         },
         clearForm() {
             this.producto.name = "";
@@ -79,4 +86,11 @@ export default {
 
     @import '../../../assets/css/forms.scss';
     @import '../../../assets/css/buttons.scss';
+
+    .formProducto {
+        margin-top: 40px;
+    }
+    a {
+        text-decoration: none;
+    }
 </style>

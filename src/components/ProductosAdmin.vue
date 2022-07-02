@@ -24,7 +24,7 @@
                     </td>
                     <td>
                         <div class="divAdmin">
-                            <button class="btn-admin borrar" @click="deleteProduct(product.id)"><span>Borrar</span></button>
+                            <button class="btn-admin borrar" @click="borrarProducto(product.id)"><span>Borrar</span></button>
                         </div>
                     </td>
                 </tr>
@@ -48,6 +48,10 @@ export default {
         ...mapActions('products', ['getProductsFromAPI', 'editProduct', 'deleteProduct']),
         editarProducto(id) {
             this.$router.push('editarProducto/' + id);
+        },
+        borrarProducto(id){
+            this.deleteProduct(id);
+            alert(`El producto fue borrado exitosamente`);
         }
     },
     computed: {

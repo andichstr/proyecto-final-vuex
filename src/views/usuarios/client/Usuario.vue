@@ -1,16 +1,6 @@
 <template>
 <div>
     <div class="usuarios">
-        <h1>Bienvenido/a {{ users.userLogged.name }}</h1>
-        <div class="divMisOrdenes">
-        <router-link :to="{ name: 'MisOrdenes', params: { id: users.userLogged.id }}">
-            <button class="btn-ordenes ordenes">
-                <span>
-                    Mis ordenes
-                </span>
-            </button>
-        </router-link>
-    </div>
         <Productos/>
     </div>
 </div>
@@ -24,9 +14,7 @@ export default {
     name: 'Usuario',
     components: { Productos },
     computed: {
-        ...mapState(["users", ["userLogged", "orders"]]),
         ...mapState(["products", ["products"]]),
-        ...mapGetters(["getUserLogged", "getOrders"]),
         ...mapGetters(["getProducts"]),
     },
     mounted() {

@@ -1,24 +1,10 @@
 # proyecto-final
 
-## Project setup
-```
-npm install
-```
+### Usuarios para realizar las pruebas:
+### Cliente:
+Username: user
+Password: Asd123!!
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Admin:
+Username: admin
+Password: Asd123!!

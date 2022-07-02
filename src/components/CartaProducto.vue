@@ -9,12 +9,12 @@
             <h4>{{ producto.name }}</h4>
             <div>Disponibles: {{ producto.stock }}</div>
             <div>$ {{ producto.price }}</div>
-            <input type="number" v-model="contador" @keyup="checkContador()"/>
+            <input type="number" v-model="contador" @keyup="checkContador()" @change="checkContador()"/>
             <div class="divEditar">
                 <button :disabled="!botonProductoHabilitado" class="btn-editar save" @click="agregarProductoCarrito()">
                     <span>{{ valorBotonProducto }}</span>
                 </button>
-                <router-link :to="{ name: 'Producto', params: { id: producto.id }}">
+                <router-link class="noUnderline" :to="{ name: 'Producto', params: { id: producto.id }}">
                     <button type="button" class="btn-editar edit">
                         <span>Ver Detalle</span>
                     </button>
@@ -80,8 +80,18 @@ export default {
             this.producto.stock -= parseInt(this.contador);
             this.contador = 0;
             this.checkStock();
+        },
+        checkCarritoStock() {
+            this.cart.carrito.forEach(element => {
+                if (element.id == this.producto.id) {
+                    this.producto.stock -= element.stock;
+                }
+            });
         }
     },
+    mounted(){
+        this.checkCarritoStock();
+    }
 }
 </script>
 

@@ -9,7 +9,7 @@
                 <h4>{{ actualProduct.desc }}</h4>
                 <div>Disponibles: {{ actualProduct.stock }}</div>
                 <div>$ {{ actualProduct.price }}</div>
-                <input type="number" v-model="contador" @keyup="checkContador()"/>
+                <input type="number" v-model="contador" @change="checkContador()" @keyup="checkContador()"/>
                 <button :disabled="!botonProductoHabilitado" class="btn-producto save" @click="agregarProductoCarrito()">
                     <span>{{ valorBotonProducto }}</span>
                 </button>

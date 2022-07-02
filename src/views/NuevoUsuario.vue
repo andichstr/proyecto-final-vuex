@@ -10,6 +10,13 @@
                 <p class="errorForm">{{ validUsername }}</p>
             </div>
             <div class="floating-content">
+                <input type="password" id="password" placeholder=" " class="floating-input" @keyup="validatePassword()" v-model="user.password"/>
+                <label for="password" class="floating-label">Contraseña: </label>
+            </div>
+            <div class="row" v-if='validPassword != ""'>
+                <p class="errorForm">{{ validPassword }}</p>
+            </div>
+            <div class="floating-content">
                 <input type="text" id="nombre" placeholder=" " class="floating-input" @keyup="validateNombre($event)" v-model="user.name"/>
                 <label for="nombre" class="floating-label">Nombre y Apellido: </label>
             </div>
@@ -29,13 +36,6 @@
             </div>
             <div class="row" v-if='validEdad != ""'>
                 <p class="errorForm">{{ validEdad }}</p>
-            </div>
-            <div class="floating-content">
-                <input type="password" id="password" placeholder=" " class="floating-input" @keyup="validatePassword()" v-model="user.password"/>
-                <label for="password" class="floating-label">Contraseña: </label>
-            </div>
-            <div class="row" v-if='validPassword != ""'>
-                <p class="errorForm">{{ validPassword }}</p>
             </div>
             <div class="row divLogin">
                 <button class="btn-login" @click="agregarUsuario">
@@ -64,7 +64,8 @@ export default {
         agregarUsuario() {
             if (this.checkNewUserForm()){
                 store.dispatch('users/addUser', this.user);
-                this.resetForm();
+                alert("Su cuenta fue creada exitosamente. Será redirigido al menú de Login.");
+                this.$router.push("/");
             } else {
                 alert("Por favor, corrija los errores del formulario y vuelva a intentarlo");
             }

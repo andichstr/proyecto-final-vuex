@@ -35,7 +35,6 @@ export default {
         },
         addProductToCart({ commit, state }, product) {
             for (let i = 0; i < state.carrito.length; i++) {
-                console.log(state.carrito[i]);
                 if (state.carrito[i].id == product.id) {
                     commit('addAmmount', { 'i': i, 'ammount': product.stock });
                     return

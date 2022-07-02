@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+        <img src="https://i.imgur.com/eLUSUFJ.png" alt="logo" class="portada"/>
       <h2>Inicio de Sesión</h2>
         <form class="form" action="">
             <div class="floating-content">
@@ -73,10 +74,10 @@ export default {
                 }
             } else if (result.err === -1) {
                 this.msgError = "La contraseña no coincide con el usuario ingresado.";
-                console.log(this.msgError);
+                alert(this.msgError);
             } else if (result.err === -2) {
                 this.msgError = "El usuario ingresado no se encuentra registrado.";
-                console.log(this.msgError);
+                alert(this.msgError);
             }
         },
     },
@@ -93,10 +94,15 @@ export default {
     @import '../assets/css/buttons.scss';
     .container{
         width: 50%;
-        padding-top: 200px;
+        padding-top: 100px;
         text-align: center;
     }
     .centrado {
         text-align: center;
+    }
+
+    .portada {
+        max-height: 200px;
+        max-width: 200px;
     }
 </style>

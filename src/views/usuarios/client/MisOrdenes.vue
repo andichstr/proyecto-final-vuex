@@ -19,7 +19,7 @@
                 </tr>
             </tbody>
         </table>
-        <router-link to="/index">
+        <router-link class="noUnderline" to="/index">
             <button class="btn-editar volver">
                 <span>Volver</span>
             </button>
