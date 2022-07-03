@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <h1>Proyecto final Vue 2</h1>
+    <h2>Andrés Schuster</h2>
         <img src="https://i.imgur.com/eLUSUFJ.png" alt="logo" class="portada"/>
       <h2>Inicio de Sesión</h2>
         <form class="form" action="">

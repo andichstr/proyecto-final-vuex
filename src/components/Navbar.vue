@@ -2,7 +2,7 @@
     <div>
         <div v-if="users.userLogged.rol == 1">
             <b-navbar toggleable="lg" type="dark" variant="info">
-            <b-navbar-brand href="#">
+            <b-navbar-brand>
                 <img src="https://i.imgur.com/eLUSUFJ.png" alt="logo" class="logo">
             </b-navbar-brand>
                 <b-navbar-nav class="ml-auto">
