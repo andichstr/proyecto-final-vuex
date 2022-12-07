@@ -1,4 +1,4 @@
-# proyecto-final
+# Proyecto final de curso de Vue en Coderhouse.
 
 ## Publicado en: https://andichstr.github.io/proyecto-final
 
